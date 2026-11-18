@@ -113,7 +113,6 @@ class MainActivity : ComponentActivity() {
         } catch (_: Exception) {}
         requestNetwork(
             NetworkRequest.Builder()
-                .addTransportType(NetworkCapabilities.TRANSPORT_CELLULAR)
                 .addCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
                 .build(),
             createCellularNetworkCallback(),
