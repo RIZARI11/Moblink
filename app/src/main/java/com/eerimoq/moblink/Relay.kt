@@ -330,11 +330,11 @@ class Relay {
         streamerNetwork?.bindSocket(streamerSocket)
         destinationSocket = DatagramSocket()
         destinationSocket?.soTimeout = 30 * 1000
-        destinationNetwork?.bindSocket(destinationSocket)
+        // destinationNetwork?.bindSocket(destinationSocket)
         startStreamerReceiver(
             streamerSocket!!,
             destinationSocket!!,
-            destinationNetwork!!.getAllByName(startTunnel.address).first(),
+            InetAddress.getAllByName(startTunnel.address).first(),
             startTunnel.port,
             this,
             streamerUrl,
