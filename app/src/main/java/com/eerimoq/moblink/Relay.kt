@@ -166,7 +166,8 @@ class Relay {
        val client =
            streamerNetwork?.let {
                okHttpClient.newBuilder().socketFactory(it.socketFactory).build()
-           } ?: okHttpClient        webSocket =
+           } ?: okHttpClient
+        webSocket =
             client.newWebSocket(
                 request,
                 object : WebSocketListener() {
