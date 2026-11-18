@@ -163,8 +163,10 @@ class Relay {
         // Bind to a WiFi or Ethernet network only when one of its routes covers the
         // streamer's address. Otherwise, for example when this device is the hotspot
         // the streamer is connected to, let Android route the connection normally.
-       val client = okHttpClient
-        webSocket =
+       val client =
+           streamerNetwork?.let {
+               okHttpClient.newBuilder().socketFactory(it.socketFactory).build()
+           } ?: okHttpClient        webSocket =
             client.newWebSocket(
                 request,
                 object : WebSocketListener() {
@@ -319,7 +321,7 @@ class Relay {
             return
         }
         streamerSocket = DatagramSocket()
-        // streamerNetwork?.bindSocket(streamerSocket)
+         streamerNetwork?.bindSocket(streamerSocket)
         destinationSocket = DatagramSocket()
         destinationSocket?.soTimeout = 30 * 1000
         // destinationNetwork?.bindSocket(destinationSocket)
